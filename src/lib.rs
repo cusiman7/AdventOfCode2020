@@ -2,6 +2,7 @@
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
+use std::iter::Iterator;
 
 // The output is wrapped in a Result to allow matching on errors
 // Returns an Iterator to the Reader of the lines of the file.
@@ -19,3 +20,12 @@ where P: AsRef<Path>, {
         .map(|l| l.expect("Could not parse line"))
         .collect()
 }
+
+pub fn file_lines_iter<F>(file: F) -> impl Iterator<Item = String>
+where F: AsRef<Path> {
+    let f = File::open(file).expect("No such file");
+    io::BufReader::new(f)
+        .lines()
+        .map(Result::unwrap)
+}
+
