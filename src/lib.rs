@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 use std::iter::Iterator;
+use std::ops::{Add, AddAssign, Mul};
 
 // The output is wrapped in a Result to allow matching on errors
 // Returns an Iterator to the Reader of the lines of the file.
@@ -27,5 +28,42 @@ where F: AsRef<Path> {
     io::BufReader::new(f)
         .lines()
         .map(Result::unwrap)
+}
+
+#[derive(Debug, Copy, Clone, PartialEq)]
+pub struct Vec2 {
+    pub x: i32,
+    pub y: i32,
+}
+
+impl Add for Vec2 {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self {
+        Self {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+impl AddAssign for Vec2 {
+    fn add_assign(&mut self, other: Self) {
+        *self = Self {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        };
+    }
+}
+
+impl Mul<i32> for Vec2 {
+    type Output = Self;
+
+    fn mul(self, rhs: i32) -> Self::Output {
+        Self {
+            x: self.x * rhs,
+            y: self.y * rhs,
+        }
+    }
 }
 
