@@ -17,7 +17,7 @@ fn dirs_3d() -> impl Iterator<Item = &'static Vec3> {
     unsafe {
         if DIRS.is_none() {
             DIRS = Some(Vec::new());
-            multi_for! { [x=-1..=1, y=-1..=1, z=-1..=1]
+            multi_for! { [x in -1..=1, y in -1..=1, z in -1..=1]
                 if x == 0 && y == 0 && z == 0 {
                     continue;
                 }
@@ -35,7 +35,7 @@ fn dirs_4d() -> impl Iterator<Item = &'static Vec4> {
     unsafe {
         if DIRS.is_none() {
             DIRS = Some(Vec::new());
-            multi_for! { [x=-1..=1, y=-1..=1, z=-1..=1, w=-1..=1]
+            multi_for! { [x in -1..=1, y in -1..=1, z in -1..=1, w=-1..=1]
                 if x == 0 && y == 0 && z == 0 && w == 0 {
                     continue;
                 }

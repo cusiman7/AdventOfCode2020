@@ -164,14 +164,14 @@ impl Mul<i32> for Vec4 {
 
 #[macro_export]
 macro_rules! multi_for {
-    ([$x:ident=$x_range:expr, $y:ident=$y_range:expr] $($body:tt)*) => {
+    ([$x:ident in $x_range:expr, $y:ident in $y_range:expr] $($body:tt)*) => {
         for $y in $y_range {
             for $x in $x_range {
                 $($body)*
             }
         }
     };
-    ([$x:ident=$x_range:expr, $y:ident=$y_range:expr, $z:ident=$z_range:expr] $($body:tt)*) => {
+    ([$x:ident in $x_range:expr, $y:ident in $y_range:expr, $z:ident in $z_range:expr] $($body:tt)*) => {
         for $z in $z_range {
             for $y in $y_range {
                 for $x in $x_range {
@@ -180,7 +180,7 @@ macro_rules! multi_for {
             }
         }
     };
-    ([$x:ident=$x_range:expr, $y:ident=$y_range:expr, $z:ident=$z_range:expr, $w:ident=$w_range:expr] $($body:tt)*) => {
+    ([$x:ident in $x_range:expr, $y:ident in $y_range:expr, $z:ident in $z_range:expr, $w:ident=$w_range:expr] $($body:tt)*) => {
         for $w in $w_range {
             for $z in $z_range {
                 for $y in $y_range {
